@@ -1,0 +1,8 @@
+DH is the algorithm name; ffdhe2048 is a safe prime group defined in RFC 7919.
+
+You can substitute with other sizes: ffdhe3072, ffdhe4096, etc.
+
+This code uses no deprecated functions — only EVP_PKEY and EVP_PKEY_CTX, which are OpenSSL 3.x–friendly.
+
+
+ChatGPT made this
