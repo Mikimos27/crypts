@@ -1,6 +1,7 @@
 #include <openssl/evp.h>
 #include <openssl/params.h>
 #include <openssl/err.h>
+#include <openssl/rand.h>
 #include <stdio.h>
 #include "derive_aes_dh.c"
 
@@ -67,6 +68,8 @@ int main(void) {
     unsigned char salt[16] = {0}; // You can randomize this
     unsigned char info[] = "aes-gcm key derivation";
 
+    RAND_bytes(salt, sizeof(salt));
+
     // `shared_secret` and `shared_secret_len` come from EVP_PKEY_derive()
     unsigned char *aes_key = derive_aes_key_from_dh_secret(
         secret, slen,
@@ -80,6 +83,11 @@ int main(void) {
     }
     printf("\n");
 
+    printf("key salt:\n");
+    for(int i = 0; i < sizeof(salt); i++){
+        printf("%02x", salt[i]);
+    }
+    printf("\n");
 
 
 
