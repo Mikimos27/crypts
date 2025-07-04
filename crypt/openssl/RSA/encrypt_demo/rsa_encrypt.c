@@ -22,12 +22,13 @@
 #include <openssl/core_names.h>
 #include "rsa_encrypt.h"
 
+#define OPENSSL_API_COMPAT 0x30500010
 /* Input data to encrypt */
 static const unsigned char msg[] =
     "To be, or not to be, that is the question,\n"
     "Whether tis nobler in the minde to suffer\n"
     "The slings and arrowes of outragious fortune,\n"
-    "Or to take Armes again in a sea of troublesaaaaaaaaaaaaaaaaaaaaaaa";
+    "Or to take Armes again in a sea of troubles";
 
 /*
  * For do_encrypt(), load an RSA public key from pub_key_der[].

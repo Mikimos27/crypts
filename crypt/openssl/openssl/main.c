@@ -3,6 +3,8 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 
+#define OPENSSL_API_COMPAT 0x30500010
+
 int main(int argc, char** argv)
 {
     EVP_MD_CTX *ctx = NULL;

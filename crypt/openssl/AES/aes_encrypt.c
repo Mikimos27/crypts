@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define AES_KEYLEN 16  // 128 bits
+#define AES_KEYLEN 32  // 128 bits
 
 void handleErrors() {
     ERR_print_errors_fp(stderr);
@@ -83,7 +83,13 @@ int main() {
     decryptedtext[decryptedtext_len] = '\0';
 
     printf("Plaintext: %s\n", plaintext);
-    printf("Ciphertext (hex): ");
+    printf("Key (hex):\n");
+    for (int i = 0; i < AES_KEYLEN; i++)
+        printf("%02x", key[i]);
+    printf("\nIV (hex):\n");
+    for (int i = 0; i < AES_KEYLEN; i++)
+        printf("%02x", iv[i]);
+    printf("\nCiphertext (hex):\n");
     for (int i = 0; i < ciphertext_len; i++)
         printf("%02x", ciphertext[i]);
     printf("\nDecrypted text: %s\n", decryptedtext);

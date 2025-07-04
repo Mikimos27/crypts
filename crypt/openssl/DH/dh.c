@@ -2,9 +2,11 @@
 #include <openssl/params.h>
 #include <openssl/err.h>
 #include <stdio.h>
+#include "derive_aes_dh.c"
 
 // Choose desired group
 #define DH_GROUP "ffdhe2048"
+#define OPENSSL_API_COMPAT 0x30500010
 
 static void handle_errors(void) {
     ERR_print_errors_fp(stderr);
@@ -35,7 +37,7 @@ int main(void) {
 
     // Generate our own key
     kctx = EVP_PKEY_CTX_new(params, NULL);                        //
-    if (!kctx || EVP_PKEY_keygen_init(kctx) <= 0) handle_errors();//TO ZASTĄPIĆ CZYTANIEM KLUCZY Z PLIKU
+    if (!kctx || EVP_PKEY_keygen_init(kctx) <= 0) handle_errors();//TO ZASTĄPIĆ CZYTANIEM KLUCZY Z PLIKU??
     if (EVP_PKEY_keygen(kctx, &my_key) <= 0) handle_errors();     //
 
     // Simulate peer keygen
@@ -56,6 +58,30 @@ int main(void) {
     printf("Shared secret (%zu bytes):\n", slen);
     for (size_t i = 0; i < slen; i++) printf("%02x", secret[i]);
     printf("\n");
+
+
+
+
+
+    size_t key_len = 32; // 256-bit AES key
+    unsigned char salt[16] = {0}; // You can randomize this
+    unsigned char info[] = "aes-gcm key derivation";
+
+    // `shared_secret` and `shared_secret_len` come from EVP_PKEY_derive()
+    unsigned char *aes_key = derive_aes_key_from_dh_secret(
+        secret, slen,
+        salt, sizeof(salt),
+        info, sizeof(info) - 1,
+        key_len
+    );
+    printf("aes key:\n");
+    for(int i = 0; i < key_len; i++){
+        printf("%02x", aes_key[i]);
+    }
+    printf("\n");
+
+
+
 
     EVP_PKEY_free(params);
     EVP_PKEY_free(my_key);
