@@ -37,7 +37,6 @@ unsigned char *derive_aes_key_from_dh_secret(const unsigned char *secret, size_t
         goto err;
 
     EVP_KDF_CTX_free(kctx);
-    OPENSSL_free(aes_key);
     return aes_key;
 
 err:

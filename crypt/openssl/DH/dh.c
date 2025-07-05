@@ -91,6 +91,8 @@ int main(void) {
 
 
 
+    
+    OPENSSL_free(aes_key);
     EVP_PKEY_free(params);
     EVP_PKEY_free(my_key);
     EVP_PKEY_free(peer_key);

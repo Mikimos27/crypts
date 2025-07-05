@@ -1,1 +1,1 @@
-gcc -o gcrypt_hash gcrypt_hash.c -lgcrypt
+gcc -o gcrypt_hash.elf gcrypt_hash.c -lgcrypt
