@@ -115,6 +115,7 @@ int main() {
     } else {
         printf("Decryption failed: Authentication failed!\n");
     }
+    printf("Plaintext size = %d\nCiphertext size = %d\n", pt_len, ct_len);
 
     return 0;
 }

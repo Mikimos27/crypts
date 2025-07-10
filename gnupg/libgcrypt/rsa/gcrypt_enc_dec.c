@@ -42,6 +42,9 @@ int main(){
     gcry_sexp_t pub_key = load_key("public_key.pem");
     gcry_sexp_t prv_key = load_key("private_key.pem");
 
+    gcry_sexp_dump(pub_key);
+    gcry_sexp_dump(prv_key);
+
     gcry_sexp_release(pub_key);
     return 0;
 }

@@ -218,6 +218,7 @@ int main(void)
     size_t encrypted_len = 0, decrypted_len = 0;
     unsigned char *encrypted = NULL, *decrypted = NULL;
     OSSL_LIB_CTX *libctx = NULL;
+    fprintf(stdout, "msglen = %ld\n", msg_len);
 
     if (!do_encrypt(libctx, msg, msg_len, &encrypted, &encrypted_len)) {
         fprintf(stderr, "encryption failed.\n");
